@@ -1,4 +1,5 @@
 const STORAGE_KEY = "mini-app-reminders";
+const THEME_KEY = "mini-app-theme";
 
 function loadReminders() {
   try {
@@ -161,11 +162,53 @@ function renderReminders(reminders) {
   }
 }
 
+function getInitialTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved === "light" || saved === "dark") {
+    return saved;
+  }
+  if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+    return "light";
+  }
+  return "dark";
+}
+
+function applyTheme(theme) {
+  const body = document.body;
+  body.setAttribute("data-theme", theme);
+
+  const iconEl = document.getElementById("theme-toggle-icon");
+  const labelEl = document.getElementById("theme-toggle-label");
+
+  if (!iconEl || !labelEl) return;
+
+  if (theme === "light") {
+    iconEl.textContent = "☀️";
+    labelEl.textContent = "Светлая";
+  } else {
+    iconEl.textContent = "🌙";
+    labelEl.textContent = "Тёмная";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("reminder-form");
   const titleInput = document.getElementById("title");
   const datetimeInput = document.getElementById("datetime");
   const clearCompletedBtn = document.getElementById("clear-completed");
+  const themeToggleBtn = document.getElementById("theme-toggle");
+
+  const initialTheme = getInitialTheme();
+  applyTheme(initialTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      const current = document.body.getAttribute("data-theme") === "light" ? "light" : "dark";
+      const next = current === "light" ? "dark" : "light";
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    });
+  }
 
   renderReminders(loadReminders());
 

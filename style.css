@@ -1,0 +1,360 @@
+:root {
+  --bg: #050816;
+  --bg-elevated: #0f172a;
+  --bg-elevated-soft: #111827;
+  --accent: #22c55e;
+  --accent-soft: rgba(34, 197, 94, 0.1);
+  --accent-strong: #4ade80;
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+  --danger: #f97373;
+  --border-subtle: rgba(148, 163, 184, 0.25);
+  --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.8);
+  --radius-lg: 18px;
+  --radius-full: 999px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1e293b 0, #020617 45%, #000 100%);
+  color: var(--text);
+}
+
+body {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 960px;
+  padding: 32px 20px 40px;
+  margin: auto;
+}
+
+.app__header {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.app__title {
+  margin: 0 0 4px;
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.app__subtitle {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.app__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr);
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .app__main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.card {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
+  border-radius: var(--radius-lg);
+  padding: 18px 18px 16px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(26px);
+}
+
+.card--form {
+  align-self: flex-start;
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card__actions {
+  display: flex;
+  gap: 4px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form__label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.form__input {
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  padding: 9px 11px;
+  font-size: 14px;
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease,
+    transform 0.08s ease;
+}
+
+.form__input::placeholder {
+  color: rgba(148, 163, 184, 0.7);
+}
+
+.form__input:focus {
+  border-color: var(--accent);
+  background: rgba(15, 23, 42, 0.98);
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25);
+  transform: translateY(-1px);
+}
+
+.button {
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.16s ease, transform 0.08s ease, box-shadow 0.16s ease,
+    color 0.16s ease, border-color 0.16s ease;
+  white-space: nowrap;
+}
+
+.button--primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #022c22;
+  box-shadow: 0 12px 25px rgba(16, 185, 129, 0.35);
+}
+
+.button--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 35px rgba(16, 185, 129, 0.45);
+}
+
+.button--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 18px rgba(16, 185, 129, 0.4);
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.button--ghost:hover {
+  background: rgba(15, 23, 42, 0.8);
+  color: var(--text);
+}
+
+.button--ghost:active {
+  transform: translateY(1px);
+}
+
+.reminders {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 430px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reminders::-webkit-scrollbar {
+  width: 6px;
+}
+
+.reminders::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.reminders::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.6);
+  border-radius: 999px;
+}
+
+.reminder {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 9px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.08s ease,
+    box-shadow 0.15s ease;
+}
+
+.reminder:hover {
+  border-color: rgba(148, 163, 184, 0.7);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
+  transform: translateY(-1px);
+}
+
+.reminder__main {
+  flex: 1;
+  min-width: 0;
+}
+
+.reminder__title {
+  margin: 0 0 2px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reminder__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.reminder__meta-badge {
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.reminder__meta-badge--overdue {
+  border-color: rgba(248, 113, 113, 0.8);
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.4);
+}
+
+.reminder__meta-badge--soon {
+  border-color: rgba(234, 179, 8, 0.8);
+  color: #facc15;
+  background: rgba(113, 63, 18, 0.5);
+}
+
+.reminder__meta-badge--future {
+  border-color: rgba(52, 211, 153, 0.9);
+  color: #6ee7b7;
+  background: rgba(6, 78, 59, 0.55);
+}
+
+.reminder__controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+}
+
+.reminder__toggle {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  background: radial-gradient(circle at 30% 30%, rgba(248, 250, 252, 0.15), transparent 55%),
+    rgba(15, 23, 42, 0.9);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease, transform 0.08s ease,
+    box-shadow 0.16s ease, color 0.16s ease;
+}
+
+.reminder__toggle:hover {
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25);
+}
+
+.reminder--completed .reminder__toggle {
+  background: radial-gradient(circle at 30% 30%, rgba(248, 250, 252, 0.6), transparent 55%),
+    linear-gradient(135deg, var(--accent), var(--accent-strong));
+  border-color: var(--accent-strong);
+  color: #052e16;
+}
+
+.reminder--completed .reminder__title {
+  text-decoration: line-through;
+  color: rgba(156, 163, 175, 0.85);
+}
+
+.reminder--completed .reminder__meta {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.reminder__delete {
+  border-radius: 999px;
+  border: none;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+  background: transparent;
+  color: rgba(148, 163, 184, 0.9);
+  transition: background 0.16s ease, color 0.16s ease, transform 0.08s ease;
+}
+
+.reminder__delete:hover {
+  background: rgba(127, 29, 29, 0.8);
+  color: #fecaca;
+}
+
+.reminder__delete:active {
+  transform: translateY(1px);
+}
+
+.empty-state {
+  margin: 12px 2px 2px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.hidden {
+  display: none !important;
+}

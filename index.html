@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Напоминалка</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app__header">
+        <h1 class="app__title">Мои напоминания</h1>
+        <p class="app__subtitle">Добавляйте события, указывайте время и отмечайте выполненные.</p>
+      </header>
+
+      <main class="app__main">
+        <section class="card card--form">
+          <h2 class="card__title">Новое напоминание</h2>
+          <form id="reminder-form" class="form">
+            <div class="form__field">
+              <label for="title" class="form__label">Событие</label>
+              <input
+                type="text"
+                id="title"
+                class="form__input"
+                placeholder="Позвонить, сходить, купить..."
+                required
+              />
+            </div>
+
+            <div class="form__field">
+              <label for="datetime" class="form__label">Дата и время</label>
+              <input
+                type="datetime-local"
+                id="datetime"
+                class="form__input"
+                required
+              />
+            </div>
+
+            <button type="submit" class="button button--primary">
+              Добавить
+            </button>
+          </form>
+        </section>
+
+        <section class="card card--list">
+          <header class="card__header">
+            <h2 class="card__title">Список напоминаний</h2>
+            <div class="card__actions">
+              <button id="clear-completed" class="button button--ghost">
+                Очистить выполненные
+              </button>
+            </div>
+          </header>
+
+          <ul id="reminders-list" class="reminders">
+            <!-- элементы будут добавляться скриптом -->
+          </ul>
+
+          <p id="empty-state" class="empty-state">
+            Пока нет напоминаний. Добавьте первое событие выше.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
